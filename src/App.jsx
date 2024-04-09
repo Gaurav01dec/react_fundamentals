@@ -32,26 +32,46 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
+
+            {/* method 1 */}
             <CoreConcept title={CORE_CONCEPTS[0].title} description={CORE_CONCEPTS[0].description} image={CORE_CONCEPTS[0].image} />
             <CoreConcept title={CORE_CONCEPTS[1].title} description={CORE_CONCEPTS[1].description} image={CORE_CONCEPTS[1].image} />
             <CoreConcept title={CORE_CONCEPTS[2].title} description={CORE_CONCEPTS[2].description} image={CORE_CONCEPTS[2].image} />
             <CoreConcept {...CORE_CONCEPTS[3]} />
+
+            {/* if we have n number of records then we can use the map method to do it */}
+            {/* method 2 */}
+            {/* {CORE_CONCEPTS.map((element) => <CoreConcept {...element} />)} */}
           </ul>
         </section>
 
         <section id="examples">
           <h2>Topics</h2>
           <menu>
-            <Tabbuttons onSelect={() => handleClick("components")}>Components</Tabbuttons>
-            <Tabbuttons onSelect={() => handleClick("jsx")} >JSX</Tabbuttons>
-            <Tabbuttons onSelect={() => handleClick("props")} >Props</Tabbuttons>
-            <Tabbuttons onSelect={() => handleClick("state")} >States</Tabbuttons>
+            <Tabbuttons selectedHighlight={selectedTopic === "components"} onSelect={() => handleClick("components")}>Components</Tabbuttons>
+            <Tabbuttons selectedHighlight={selectedTopic === "jsx"} onSelect={() => handleClick("jsx")} >JSX</Tabbuttons>
+            <Tabbuttons selectedHighlight={selectedTopic === "props"} onSelect={() => handleClick("props")} >Props</Tabbuttons>
+            <Tabbuttons selectedHighlight={selectedTopic === "state"} onSelect={() => handleClick("state")} >States</Tabbuttons>
           </menu>
 
           {/* using ternary statements to render the dynamic content */}
+          {/* more concise way below */}
           {/* if not selected or undefined */}
-          {!selectedTopic ? <p>Please select a topic</p> : null}
+          {/* {!selectedTopic ? <p>Please select a topic</p> : null} */}
           {/* if selected */}
+          {/* {selectedTopic ? (
+            <div id="tab-content">
+              <h3>{EXAMPLES[selectedTopic].title}</h3>
+              <p>{EXAMPLES[selectedTopic].description}</p>
+              <pre>
+                <code>
+                  {EXAMPLES[selectedTopic].code}
+                </code>
+              </pre>
+            </div>)
+            : null} */}
+
+          {/* more concise way */}
           {selectedTopic ? (
             <div id="tab-content">
               <h3>{EXAMPLES[selectedTopic].title}</h3>
@@ -62,7 +82,7 @@ function App() {
                 </code>
               </pre>
             </div>)
-            : null}
+            : <p>Please select a topic</p>}
 
 
         </section>
