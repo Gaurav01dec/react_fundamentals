@@ -1,5 +1,7 @@
 import Tabbuttons from "./Tabbuttons"
 import { EXAMPLES } from "../data-with-examples";
+import Section from "./Section";
+import Tabs from "./Tabs";
 //using react hooks
 import { useState } from "react";
 
@@ -19,21 +21,25 @@ export default function Examples() {
 
     return (
 
-        <section id="examples">
-            <h2>Topics</h2>
-            <menu>
-                <Tabbuttons selectedHighlight={selectedTopic === "components"} onSelect={() => handleClick("components")}>Components</Tabbuttons>
-                <Tabbuttons selectedHighlight={selectedTopic === "jsx"} onSelect={() => handleClick("jsx")} >JSX</Tabbuttons>
-                <Tabbuttons selectedHighlight={selectedTopic === "props"} onSelect={() => handleClick("props")} >Props</Tabbuttons>
-                <Tabbuttons selectedHighlight={selectedTopic === "state"} onSelect={() => handleClick("state")} >States</Tabbuttons>
-            </menu>
+        <Section title="Examples" id="examples">
+            <Tabs 
+            buttonsCOntainer = "menu"
+            buttons={
+                <div>
+                    <Tabbuttons selectedHighlight={selectedTopic === "components"} onClick={() => handleClick("components")}>Components</Tabbuttons>
+                    <Tabbuttons selectedHighlight={selectedTopic === "jsx"} onClick={() => handleClick("jsx")} >JSX</Tabbuttons>
+                    <Tabbuttons selectedHighlight={selectedTopic === "props"} onClick={() => handleClick("props")} >Props</Tabbuttons>
+                    <Tabbuttons selectedHighlight={selectedTopic === "state"} onClick={() => handleClick("state")} >States</Tabbuttons>
 
-            {/* using ternary statements to render the dynamic content */}
-            {/* more concise way below */}
-            {/* if not selected or undefined */}
-            {/* {!selectedTopic ? <p>Please select a topic</p> : null} */}
-            {/* if selected */}
-            {/* {selectedTopic ? (
+                </div>
+            }>
+
+                {/* using ternary statements to render the dynamic content */}
+                {/* more concise way below */}
+                {/* if not selected or undefined */}
+                {/* {!selectedTopic ? <p>Please select a topic</p> : null} */}
+                {/* if selected */}
+                {/* {selectedTopic ? (
             <div id="tab-content">
               <h3>{EXAMPLES[selectedTopic].title}</h3>
               <p>{EXAMPLES[selectedTopic].description}</p>
@@ -45,20 +51,21 @@ export default function Examples() {
             </div>)
             : null} */}
 
-            {/* more concise way */}
-            {selectedTopic ? (
-                <div id="tab-content">
-                    <h3>{EXAMPLES[selectedTopic].title}</h3>
-                    <p>{EXAMPLES[selectedTopic].description}</p>
-                    <pre>
-                        <code>
-                            {EXAMPLES[selectedTopic].code}
-                        </code>
-                    </pre>
-                </div>)
-                : <p>Please select a topic</p>}
-
-
-        </section>
+                {/* more concise way */}
+                {selectedTopic ? (
+                    <div id="tab-content">
+                        <h3>{EXAMPLES[selectedTopic].title}</h3>
+                        <p>{EXAMPLES[selectedTopic].description}</p>
+                        <pre>
+                            <code>
+                                {EXAMPLES[selectedTopic].code}
+                            </code>
+                        </pre>
+                    </div>)
+                    : <p>Please select a topic</p>}
+            </Tabs>
+            {/* <menu>
+               </menu> */}
+        </Section>
     )
 }
